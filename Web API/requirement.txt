@@ -1,0 +1,8 @@
+tensorflow==1.15
+keras
+Flask
+flask_cors
+pandas
+scipy
+joblib
+squarify
