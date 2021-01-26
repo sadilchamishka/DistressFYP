@@ -1,2 +1,2 @@
 
-![alt text](https://github.com/sadilchamishka/DistressFYP/blob/master/Research Work/CNN + GSOM model Architecture.jpg?raw=true)
+![alt text](https://github.com/sadilchamishka/DistressFYP/blob/master/Research%20Work/CNN%20%2B%20GSOM%20model%20Architecture.jpg?raw=true)
