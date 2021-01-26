@@ -6,3 +6,7 @@ pandas
 scipy
 joblib
 squarify
+pyAudioAnalysis
+eyed3
+pydub
+hmmlearn
