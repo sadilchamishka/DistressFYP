@@ -1,10 +1,8 @@
-#import tensorflow as tf
-#from keras.models import load_model
+import tensorflow as tf
+from keras.models import load_model
 from FeatureExtraction import stft_matrix, get_random_samples
 from FeaturePreprocess import prep_full_test, keras_img_prep
 
-global graph
-graph = tf.get_default_graph()
 model = load_model('cnn_5100.h5')
 model.pop()
 model.pop()
@@ -23,7 +21,5 @@ def get_predictions_from_cnn(audio):
     data, input_shape = keras_img_prep(data, img_depth, img_rows, img_cols)
 
     return model.predict(data)
-
-    
 
 
