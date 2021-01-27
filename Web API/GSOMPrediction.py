@@ -1,5 +1,6 @@
 import joblib
 import sys
+import numpy as np
 
 sys.path.append('GSOM')
 import data_parser as Parser
@@ -7,7 +8,9 @@ from util import utilities as Utils
 from params import params as Params
 from core4 import core_controller as Core
 
-gsom_nodemap_5000_for_0_5 = joblib.load('gsom_nodemap_5100_for_0_7.joblib')
+input_vector_database, labels, classes = Parser.InputParser.parse_input_train_data('cnn_5100_input_file_to_gsom', None)
+
+gsom_nodemap = joblib.load('gsom_nodemap_5100_for_0_7.joblib')
 threshold=0.35
 
 def get_predictions_from_gsom(predictions):

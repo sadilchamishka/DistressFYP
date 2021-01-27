@@ -1,4 +1,5 @@
 #create spectrograms
+import random
 import numpy as np
 from numpy.lib import stride_tricks
 import os

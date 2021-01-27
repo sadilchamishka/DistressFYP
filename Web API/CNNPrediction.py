@@ -3,12 +3,6 @@ from keras.models import load_model
 from FeatureExtraction import stft_matrix, get_random_samples
 from FeaturePreprocess import prep_full_test, keras_img_prep
 
-model = load_model('cnn_5100.h5')
-model.pop()
-model.pop()
-model.pop()
-model.compile(loss='categorical_crossentropy',optimizer='adadelta',metrics=['accuracy'])
-
 def get_predictions_from_cnn(audio):
     data = get_random_samples(stft_matrix(audio),46,125)
     data = prep_full_test(data)
@@ -20,6 +14,12 @@ def get_predictions_from_cnn(audio):
     # used Theano dim_ordering (th), (# chans, # images, # rows, # cols)
     data, input_shape = keras_img_prep(data, img_depth, img_rows, img_cols)
 
+    model = load_model('cnn_5100.h5')
+    model.pop()
+    model.pop()
+    model.pop()
+    model.compile(loss='categorical_crossentropy',optimizer='adadelta',metrics=['accuracy'])
     return model.predict(data)
+    
 
 
