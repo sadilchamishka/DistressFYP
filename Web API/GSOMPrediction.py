@@ -46,6 +46,39 @@ def get_predictions_from_gsom(predictions):
 
     return int(np.round(np.average(test_predictions)))
 
+def get_predictions_list_from_gsom(predictions):
+
+    f = open("input_file_to_gsom","w")
+    for i in range(len(predictions)):
+        comma_separated_features = ','.join([str(i) for i in predictions[i]])
+        f.write(str(i) + "," + comma_separated_features +"\n")   
+
+    input_vector_database, labels = Parser.InputParser.parse_input_test_data('input_file_to_gsom', None) 
+
+    test_predictions = []
+    for input_id in labels:
+        winner = Utils.Utilities.select_winner(gsom_nodemap, input_vector_database[0][input_id], Params.DistanceFunction.EUCLIDEAN, -1)
+        label_list = get_winner_labels(gsom_nodemap,winner.x,winner.y)
+
+        radius=0
+        x = winner.x
+        y = winner.y
+
+        while(len(label_list)==0):      
+            radius=radius+1
+            label_list=label_list + get_labels_in_radius(gsom_nodemap,radius,x,y)
+        
+        a = label_list.count('1')
+        b = label_list.count('0')
+        p = a/(a+b)
+
+        if p>=threshold:
+            test_predictions.append(1)
+        else:
+            test_predictions.append(0)
+
+    return test_predictions
+
 
 def get_labels_in_radius(gsom_nodemap,radius,x,y):  
   label_list = get_winner_labels(gsom_nodemap,x+radius,y)+get_winner_labels(gsom_nodemap,x-radius,y)+get_winner_labels(gsom_nodemap,x,y+radius)+get_winner_labels(gsom_nodemap,x,y-radius)+get_winner_labels(gsom_nodemap,x+radius,y+radius)+get_winner_labels(gsom_nodemap,x+radius,y-radius)+get_winner_labels(gsom_nodemap,x-radius,y+radius)+get_winner_labels(gsom_nodemap,x-radius,y-radius)
